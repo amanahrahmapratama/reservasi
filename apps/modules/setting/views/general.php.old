@@ -1,0 +1,50 @@
+<div class="col-sm-9 col-md-10 main">
+	<h3 class="page-header">
+		Pengaturan
+	</h3>
+	<hr>
+	<?php echo form_open_multipart(current_url()); ?>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th class="controls" align="center">Key</th>
+					<th class="controls" align="center">Value</th>
+					<th class="controls" align="center">Edit</th>
+				</tr>
+			</thead>
+			<?php
+			if (!empty($setting)) {
+				foreach ($setting as $row) {
+					?>
+					<tbody>
+						<tr>
+							<td><?php echo $row['setting_key']; ?></td>
+							<td>
+								<?php if ($row['setting_key'] == 'email_smtp_pass'): ?>
+									******************
+								<?php else: ?>
+									<?php echo $row['setting_value'] ?>
+								<?php endif ?>
+							</td>
+							<td>
+								<a class="btn btn-success btn-xs" href="<?php echo site_url('admin/setting/edit/' . $row['setting_key']); ?>" ><span class="ion-edit"></span></a>
+							</td>
+						</tr>
+					</tbody>
+					<?php
+				}
+			} else {
+				?>
+				<tbody>
+					<tr id="row">
+						<td colspan="4" align="center">Data Kosong</td>
+					</tr>
+				</tbody>
+				<?php
+			}
+			?>   
+		</table>
+	</div>
+	<?php echo form_close(); ?>
+</div>
